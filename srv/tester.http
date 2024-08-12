@@ -1,0 +1,96 @@
+### service document
+http://localhost:4004/odata/v4/CatalogService
+
+###Metedata
+
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Entity set
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$format=json
+
+### pagination or get record chunk by chunk
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$skip=2&$top=4
+
+### Filter the data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'
+
+### pattern based filter
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'bar')
+
+### count
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+### to get mimimual dataset or columns
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,email,nameFirst
+
+### get single employe data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+### Insert new record
+
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+      "nameFirst": "Sanjeev",
+      "nameMiddle": "",
+      "nameLast": "Chauhan",
+      "nameInitials": null,
+      "sex": "M",
+      "language": "E",
+      "phoneNumber": null,
+      "email": "fisher.richard@itelo.info",
+      "loginName": "FISHERRI",
+      "Currency_code": "EUR",
+      "salaryAmount": 67234,
+      "accountNumber": "567890123",
+      "bankId": "99999888",
+      "bankName": "Deutsches Geldinstitut"
+}
+### Update/Change record
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/<unique key>
+Content-Type: application/json
+      
+{
+      "nameMiddle": "NA",
+}
+
+### Remove/Delete record
+
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/<unique key>
+
+
+###to get all POs
+http://localhost:4004/odata/v4/CatalogService/POs
+### to get single PO
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2C052
+
+###to get dependent items
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2C052/Items
+
+###to load dependent data
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2C052?$expand=Items
+
+###to load CDS mix data
+http://localhost:4004/odata/v4/CatalogService/ProductCDS/74867AD200E41EDBA5D8B06B26EE0052?$expand=To_Items
+
+### calling Boost Actions
+POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC2C052')/CatalogService.boost
+Content-Type:application/json
+
+{}
+
+### calling functions read operation
+http://localhost:4004/odata/v4/CatalogService/getLargestOrder()
+
+###02BD2137-0890-1EEA-A6C2-BB55C198C7FB
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+Content-Type: application/json
+      
+{
+      "salaryAmount" : 1000,
+      "nameMiddle": "NA",
+}
+
+### custom service
+http://localhost:4004/odata/v4/myService1/ReadEmployeeSrv
